@@ -32,9 +32,10 @@ namespace Twilio.Http
         /// </summary>
         ///
         /// <param name="request">request to make</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <exception>throws exception on network or connection errors.</exception>
         /// <returns>response of the request</returns>
-        public abstract System.Threading.Tasks.Task<Response> MakeRequestAsync(Request request);
+        public abstract System.Threading.Tasks.Task<Response> MakeRequestAsync(Request request, System.Threading.CancellationToken cancellationToken = default);
 #endif
 
         /// <summary>

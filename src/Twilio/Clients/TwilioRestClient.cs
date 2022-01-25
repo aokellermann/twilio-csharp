@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Twilio.Exceptions;
 
 #if !NET35
+using System.Threading;
 using System.Threading.Tasks;
 #endif
 
@@ -121,8 +122,9 @@ namespace Twilio.Clients
         /// </summary>
         ///
         /// <param name="request">request to make</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task that resolves to the response of the request</returns>
-        public async Task<Response> RequestAsync(Request request)
+        public async Task<Response> RequestAsync(Request request, CancellationToken cancellationToken = default)
         {
             request.SetAuth(_username, _password);
 
@@ -135,7 +137,7 @@ namespace Twilio.Clients
             Response response;
             try
             {
-                response = await HttpClient.MakeRequestAsync(request);
+                response = await HttpClient.MakeRequestAsync(request, cancellationToken);
             }
             catch (Exception clientException)
             {
